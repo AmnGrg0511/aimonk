@@ -52,9 +52,9 @@ function App({ prop }) {
 
   useEffect(() => {
     if (click) {
-      setData(JSON.stringify(tree).replace(/([,:{\[])/g, '$1 ').replace(/([}\]])/g, ' $1'));
+      setData(JSON.stringify(tree).replace(/([,:{[])/g, '$1 ').replace(/([}\]])/g, ' $1'));
     }
-  }, [click]);
+  }, [click, tree]);
 
   return <>
     <Ele tree={tree} setTree={setTree} />
@@ -69,7 +69,6 @@ function App({ prop }) {
     <pre style={{ textWrap: 'wrap', fontSize: '1.2rem' }}>{data}</pre>
   </>
 }
-
 function Ele({ tree, setTree, k }) {
   const [open, setOpen] = useState(true);
   const [editable, setEditable] = useState(false);
