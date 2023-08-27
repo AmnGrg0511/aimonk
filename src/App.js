@@ -6,7 +6,7 @@ import {
   AccordionSummary as MuiAccordionSummary,
   AccordionDetails as MuiAccordionDetails,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { AccountTreeOutlined, Add, ArrowForwardIosSharp } from '@mui/icons-material';
 
@@ -46,22 +46,15 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 function App({ prop }) {
-  const [click, setClick] = useState(0);
   const [tree, setTree] = useState(prop);
   const [data, setData] = useState("");
-
-  useEffect(() => {
-    if (click) {
-      setData(JSON.stringify(tree).replace(/([,:{[])/g, '$1 ').replace(/([}\]])/g, ' $1'));
-    }
-  }, [click, tree]);
 
   return <>
     <Ele tree={tree} setTree={setTree} />
     <Button
       startIcon={<AccountTreeOutlined />}
       variant='contained'
-      onClick={() => setClick(p => p + 1)}
+      onClick={() => setData(JSON.stringify(tree).replace(/([,:{[])/g, '$1 ').replace(/([}\]])/g, ' $1'))}
       size='large'
     >
       Export
